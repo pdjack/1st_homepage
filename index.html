@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memo & Calendar</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter & Montserrat for high-end look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Onboarding Guide -->
+    <div id="onboarding-overlay" class="overlay">
+        <div class="onboarding-card">
+            <h1>Welcome to <span class="neon-text">Zenith</span></h1>
+            <p>Your minimalist space for thoughts and time.</p>
+            <ul class="guide-list">
+                <li><span class="neon-bullet">●</span> <strong>Calendar:</strong> Manage your daily checklists.</li>
+                <li><span class="neon-bullet">●</span> <strong>Canvas:</strong> Sketch ideas freely in space.</li>
+                <li><span class="neon-bullet">●</span> <strong>Persistence:</strong> Everything is saved to your browser.</li>
+            </ul>
+            <button id="close-onboarding" class="neon-button">GET STARTED</button>
+        </div>
+    </div>
+
+    <!-- Index Manager Overlay -->
+    <div id="index-manager-overlay" class="overlay hidden">
+        <div class="index-manager-card">
+            <h2>Manage Indices</h2>
+            <div class="index-input-group">
+                <input type="text" id="new-index-name" placeholder="Index Name">
+                <input type="color" id="new-index-color" value="#39FF14">
+                <button id="btn-add-index" class="neon-button small">ADD</button>
+            </div>
+            <ul id="index-list" class="index-list">
+                <!-- Indices injected by JS -->
+            </ul>
+            <button id="close-index-manager" class="neon-button">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="main-nav">
+        <div class="logo">ZENITH</div>
+        <div class="nav-controls">
+            <button id="btn-calendar" class="nav-btn active">CALENDAR</button>
+            <button id="btn-canvas" class="nav-btn">CANVAS</button>
+        </div>
+        <div class="status-indicator">
+            <span id="save-status">Synced</span>
+            <div class="pulse-dot"></div>
+        </div>
+    </header>
+
+    <main class="content-area">
+        <!-- Calendar View Section -->
+        <section id="calendar-view" class="view">
+            <div class="calendar-header">
+                <button id="prev-month">&lt;</button>
+                <h2 id="current-month-year">March 2026</h2>
+                <button id="next-month">&gt;</button>
+            </div>
+            <div class="calendar-grid-container">
+                <div class="weekdays">
+                    <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
+                </div>
+                <div id="calendar-days" class="days-grid">
+                    <!-- Days injected by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Canvas View Section -->
+        <section id="canvas-view" class="view hidden">
+            <div class="canvas-instructions">Double click to create a memo. Drag to move.</div>
+            <div id="canvas-container" class="canvas-board">
+                <svg id="canvas-svg" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; overflow:visible;"></svg>
+                <!-- Memos injected by JS -->
+            </div>
+            
+            <!-- Memo Context Menu -->
+            <div id="memo-context-menu" class="memo-context-menu hidden">
+                <input type="color" id="memo-color-picker" title="Change Color" value="#121212" style="width:24px; height:24px; border:none; padding:0; cursor:pointer;" />
+                <button id="btn-memo-lock" title="Lock">🔒</button>
+                <button id="btn-memo-duplicate" title="Duplicate">🔁</button>
+                <button id="btn-memo-delete" title="Delete">🗑️</button>
+            </div>
+
+            <!-- Memo Connection Ports -->
+            <div id="memo-ports" class="memo-ports hidden">
+                <button class="port-btn port-top" data-port="top">↑</button>
+                <button class="port-btn port-right" data-port="right">→</button>
+                <button class="port-btn port-bottom" data-port="bottom">↓</button>
+                <button class="port-btn port-left" data-port="left">←</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Checklist Panel (Slide-in) -->
+    <div id="checklist-panel" class="side-panel">
+        <div class="panel-header">
+            <h3 id="selected-date-title">March 10, 2026</h3>
+            <div class="panel-header-actions">
+                <button id="btn-manage-indices" class="icon-btn" title="Manage Indices">⚙️</button>
+                <button id="close-panel" class="close-btn">×</button>
+            </div>
+        </div>
+        <div class="checklist-input-group">
+            <select id="todo-index-select" class="index-select">
+                <option value="">No Index</option>
+            </select>
+            <input type="text" id="new-todo-input" placeholder="Add a task...">
+            <button id="add-todo-btn" class="neon-add-btn">+</button>
+        </div>
+        <ul id="todo-list" class="todo-items">
+            <!-- Items injected by JS -->
+        </ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
